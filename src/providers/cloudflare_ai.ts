@@ -8,41 +8,39 @@ export async function stream(
   env: Env,
   onChunk: (chunk: string) => void
 ): Promise<void> {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
+  const timeout = new Promise<never>((_, reject) =>
+    setTimeout(() => reject(new Error("CF AI timeout")), TIMEOUT_MS)
+  );
 
-  try {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const response = await (env.AI as any).run(
-      MODEL,
-      { messages: [{ role: "user", content: prompt }], stream: true },
-      { signal: controller.signal }
-    ) as ReadableStream;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const aiCall = (env.AI as any).run(MODEL, {
+    messages: [{ role: "user", content: prompt }],
+    stream: true,
+  }) as Promise<ReadableStream>;
 
-    const reader = response.getReader();
-    const decoder = new TextDecoder();
+  const response = await Promise.race([aiCall, timeout]);
 
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
+  const reader = response.getReader();
+  const decoder = new TextDecoder();
 
-      const text = decoder.decode(value, { stream: true });
-      const lines = text.split("\n");
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
 
-      for (const line of lines) {
-        if (!line.startsWith("data: ")) continue;
-        const data = line.slice(6).trim();
-        if (data === "[DONE]") return;
-        try {
-          const parsed = JSON.parse(data);
-          const chunk = parsed?.response ?? "";
-          if (chunk) onChunk(chunk);
-        } catch {
-          // skip malformed SSE lines
-        }
+    const text = decoder.decode(value, { stream: true });
+    const lines = text.split("\n");
+
+    for (const line of lines) {
+      if (!line.startsWith("data: ")) continue;
+      const data = line.slice(6).trim();
+      if (data === "[DONE]") return;
+      try {
+        const parsed = JSON.parse(data);
+        const chunk = parsed?.response ?? "";
+        if (chunk) onChunk(chunk);
+      } catch {
+        // skip malformed SSE lines
       }
     }
-  } finally {
-    clearTimeout(timer);
   }
 }

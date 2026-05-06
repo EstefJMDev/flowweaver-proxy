@@ -4,11 +4,11 @@ compatibility_date = "2024-01-01"
 
 [[kv_namespaces]]
 binding = "VALID_TOKENS_KV"
-id = "PLACEHOLDER_VALID_TOKENS_KV_ID"
+id = "7375a54de8c44ab88d01014217f13b00"
 
 [[kv_namespaces]]
 binding = "RATE_LIMITS_KV"
-id = "PLACEHOLDER_RATE_LIMITS_KV_ID"
+id = "d841bc6668ff4bf4a0ae1c4406ef13ab"
 
 [ai]
 binding = "AI"
