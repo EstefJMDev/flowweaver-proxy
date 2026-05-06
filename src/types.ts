@@ -2,7 +2,9 @@ export interface SynthesisRequest {
   category: string;
   titles: string[];
   domains: string[];
-  synthesis_type: "entretenimiento" | "cocina" | "noticias" | "tecnologia";
+  synthesis_type: "entretenimiento" | "cocina" | "noticias" | "tecnologia"
+    | "gaming" | "musica" | "ciencia" | "viajes"
+    | "salud" | "deportes" | "finanzas" | "educacion";
   language: string;
   prompt_version?: string;
 }

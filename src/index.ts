@@ -9,17 +9,37 @@ import entretenimientoV1 from "./prompts/v1/entretenimiento.txt";
 import cocinaV1 from "./prompts/v1/cocina.txt";
 import noticiasV1 from "./prompts/v1/noticias.txt";
 import tecnologiaV1 from "./prompts/v1/tecnologia.txt";
+import gamingV1 from "./prompts/v1/gaming.txt";
+import musicaV1 from "./prompts/v1/musica.txt";
+import cienciaV1 from "./prompts/v1/ciencia.txt";
+import viajesV1 from "./prompts/v1/viajes.txt";
+import saludV1 from "./prompts/v1/salud.txt";
+import deportesV1 from "./prompts/v1/deportes.txt";
+import finanzasV1 from "./prompts/v1/finanzas.txt";
+import educacionV1 from "./prompts/v1/educacion.txt";
 
 const PROMPTS: Record<string, Record<string, string>> = {
   v1: {
     entretenimiento: entretenimientoV1,
-    cocina: cocinaV1,
-    noticias: noticiasV1,
-    tecnologia: tecnologiaV1,
+    cocina:          cocinaV1,
+    noticias:        noticiasV1,
+    tecnologia:      tecnologiaV1,
+    gaming:          gamingV1,
+    musica:          musicaV1,
+    ciencia:         cienciaV1,
+    viajes:          viajesV1,
+    salud:           saludV1,
+    deportes:        deportesV1,
+    finanzas:        finanzasV1,
+    educacion:       educacionV1,
   },
 };
 
-const VALID_TYPES = ["entretenimiento", "cocina", "noticias", "tecnologia"] as const;
+const VALID_TYPES = [
+  "entretenimiento", "cocina", "noticias", "tecnologia",
+  "gaming", "musica", "ciencia", "viajes",
+  "salud", "deportes", "finanzas", "educacion",
+] as const;
 
 function jsonError(status: number, code: string): Response {
   return new Response(JSON.stringify({ error: code }), {
