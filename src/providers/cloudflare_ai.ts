@@ -1,7 +1,7 @@
 import { Env } from "../types";
 
-const MODEL = "@cf/meta/llama-3.1-8b-instruct";
-const TIMEOUT_MS = 8000;
+const MODEL = "@cf/meta/llama-3.3-70b-instruct-fp8-fast";
+const TIMEOUT_MS = 12000;
 
 export async function stream(
   prompt: string,
