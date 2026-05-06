@@ -15,6 +15,10 @@ NORMAS:
 - Sobre disponibilidad en plataformas: di solo plataformas donde sepas
   con seguridad razonable que está disponible en España. Si dudas,
   escribe "Plataforma: consultar JustWatch".
+- Si un título es ambiguo (varias obras con el mismo nombre o muy similar),
+  NO elijas una al azar. Preséntalo como: "Título ambiguo: existen varias
+  obras con este nombre. Indica el año o director si lo recuerdas para
+  precisar."
 
 Genera un resumen detallado en español con este formato Markdown exacto:
 
