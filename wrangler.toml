@@ -13,6 +13,20 @@ id = "d841bc6668ff4bf4a0ae1c4406ef13ab"
 [ai]
 binding = "AI"
 
+[env.preview]
+name = "flowweaver-proxy-preview"
+
+[[env.preview.kv_namespaces]]
+binding = "VALID_TOKENS_KV"
+id = "7375a54de8c44ab88d01014217f13b00"
+
+[[env.preview.kv_namespaces]]
+binding = "RATE_LIMITS_KV"
+id = "d841bc6668ff4bf4a0ae1c4406ef13ab"
+
+[env.preview.ai]
+binding = "AI"
+
 [[rules]]
 type = "Text"
 globs = ["**/*.txt"]
