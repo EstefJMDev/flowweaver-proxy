@@ -16,6 +16,7 @@ export async function stream(
   const aiCall = (env.AI as any).run(MODEL, {
     messages: [{ role: "user", content: prompt }],
     stream: true,
+    max_tokens: 2048,
   }) as Promise<ReadableStream>;
 
   const response = await Promise.race([aiCall, timeout]);
@@ -36,8 +37,10 @@ export async function stream(
       if (data === "[DONE]") return;
       try {
         const parsed = JSON.parse(data);
-        const chunk = parsed?.response ?? "";
-        if (chunk) onChunk(chunk);
+        const chunk = parsed?.response;
+        if (chunk !== undefined && chunk !== null && chunk !== "") {
+          onChunk(String(chunk));
+        }
       } catch {
         // skip malformed SSE lines
       }

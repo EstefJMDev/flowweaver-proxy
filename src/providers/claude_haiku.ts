@@ -1,7 +1,7 @@
 import { Env } from "../types";
 
 const MODEL = "claude-haiku-4-5-20251001";
-const MAX_TOKENS = 2500;
+const MAX_TOKENS = 2048;
 const TIMEOUT_MS = 10000;
 
 export async function stream(
