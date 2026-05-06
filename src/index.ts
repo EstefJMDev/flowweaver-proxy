@@ -82,6 +82,11 @@ export default {
       return jsonError(400, "SYNTHESIS_TYPE_UNKNOWN");
     }
 
+    // Guard: titles vacíos confunden al modelo con un prompt sin contenido
+    if (!body.titles || body.titles.length === 0 || body.titles.every(t => !t || typeof t !== "string")) {
+      return jsonError(400, "INVALID_BODY");
+    }
+
     // Load prompt
     const version = body.prompt_version ?? "v1";
     const promptTemplate = PROMPTS[version]?.[body.synthesis_type];
