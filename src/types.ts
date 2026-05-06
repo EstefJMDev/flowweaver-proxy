@@ -12,6 +12,7 @@ export interface SynthesisError {
     | "INVALID_TOKEN"
     | "RATE_LIMIT_EXCEEDED"
     | "SYNTHESIS_TYPE_UNKNOWN"
+    | "INVALID_BODY"
     | "PROVIDER_UNAVAILABLE";
 }
 

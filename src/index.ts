@@ -74,7 +74,7 @@ export default {
     try {
       body = await request.json<SynthesisRequest>();
     } catch {
-      return jsonError(400, "SYNTHESIS_TYPE_UNKNOWN");
+      return jsonError(400, "INVALID_BODY");
     }
 
     // Validate synthesis_type
